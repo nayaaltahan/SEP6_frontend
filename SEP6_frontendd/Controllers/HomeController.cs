@@ -23,9 +23,39 @@ namespace SEP6_frontendd.Controllers
 
         public IActionResult Index()
         {
-            var chart = BarCharts.BuildColorfulBarChart(null, null);
+            var monthlyFlights = ApiCalls.GetMonthlyFlights();
+   //         var monthlyFlightsOrigins = ApiCalls.GetMonthlyFlightsOrigin();
 
-            ViewData["chart"] = chart;
+            var months = new Dictionary<int,string>
+            {
+                {1,"Jan"}, {2,"Feb"}, {3,"Mar"}, {4,"Apr"}, {5,"May"}, {6,"June"},
+                {7, "Jul"}, {8,"Aug"}, {9, "Sep"}, {10,"Oct"}, {11, "Nov"}, {12, "Dec"}
+            };
+
+            var monthsNames = new List<string>();
+
+            foreach (var flights in monthlyFlights)
+            {
+                monthsNames.Add(months.GetValueOrDefault(flights.month));
+            }
+
+            var counts = new List<double?>();
+
+            foreach (var flight in monthlyFlights)
+            {
+                counts.Add(flight.count);
+            }
+
+            var chart1 = BarCharts.BuildColorfulBarChart(monthsNames, counts);
+
+
+            var countsByOrigin = new List<List<double?>>();
+
+
+
+            ViewData["chart1"] = chart1;
+
+            //ViewData["chart2"] = chart2;
 
             return View();
         }

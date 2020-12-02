@@ -6,6 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="ChartJSCore" Version="1.5.8" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ApiModels\" />
   </ItemGroup>
 
 </Project>
