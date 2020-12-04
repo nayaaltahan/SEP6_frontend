@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h1>Top 10 Destinations</h1>
+
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>Destination </th>
+        <th>Number of flights</th>
+    </tr>
+    @{
+        var data = ViewBag.SuccessBody;
+        foreach (var d in data)
+        {
+            <tr>
+                <td>@d.Destination</td>
+                <td>@d.count</td>
+            </tr>
+
+        }
+    }
+</table>

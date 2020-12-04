@@ -86,7 +86,7 @@ namespace SEP6_frontendd.Util
             List<string> datasetLabels)
         {
             Chart chart = BuildColorfulBarChartWithManyDatasets(labels, counts, datasetLabels);
-            StackedOptions(chart.Options);
+            PercentageOptions(chart.Options);
             return chart;
         }
 
@@ -156,19 +156,24 @@ namespace SEP6_frontendd.Util
             {
                 YAxes = new List<Scale>
                 {
-                    new BarScale()
+                    new CartesianScale
                     {
-                        Stacked = true
+                        Stacked = true,
+                        Ticks = new CartesianLinearTick
+                        {
+                            Min = 0,
+                            Max = 100,
+                            Callback = "function(value){return value+ \"%\"}"
+                        }
                     }
                 },
                 XAxes = new List<Scale>
                 {
                     new BarScale()
                     {
-                        Stacked = true
+                        Stacked = true,
                     }
                 }
-
             };
 
             options.Scales = scales;

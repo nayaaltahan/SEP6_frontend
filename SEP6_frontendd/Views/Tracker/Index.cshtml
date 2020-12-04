@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h1>Flights Tracker</h1>
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>Origin </th>
+        <th>Mean Airtime </th>
+    </tr>
+    @{
+        var data = ViewBag.SuccessBody;
+        foreach (var d in data)
+        {
+            <tr>
+                <td>@d.Origin</td>
+                <td>@d.MeanAirtime</td>
+            </tr>
+
+        }
+    }
+</table>
+
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>Origin </th>
+        <th>Mean Arrival Delay </th>
+        <th>Mean Departure Delay </th>
+    </tr>
+    @{
+        var data2 = ViewBag.table2;
+        foreach (var d in data2)
+        {
+        <tr>
+            <td>@d.Origin</td>
+            <td>@d.ArrivalDelay</td>
+            <td>@d.DepartureDelay</td>
+        </tr>
+
+        }
+    }
+</table>

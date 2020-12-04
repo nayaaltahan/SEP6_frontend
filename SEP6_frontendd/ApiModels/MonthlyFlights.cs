@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SEP6_frontendd;
 
-namespace SEP6_backendd.Models
+namespace SEP6_frontendd
 {
     public class MonthlyFlights : Flights
     {
