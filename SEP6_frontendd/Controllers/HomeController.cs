@@ -24,7 +24,7 @@ namespace SEP6_frontendd.Controllers
         public IActionResult Index()
         {
             var monthlyFlights = ApiCalls.GetMonthlyFlights();
-   //         var monthlyFlightsOrigins = ApiCalls.GetMonthlyFlightsOrigin();
+           var monthlyFlightsOrigins = ApiCalls.GetMonthlyFlightsOrigin();
 
             var months = new Dictionary<int,string>
             {
@@ -51,11 +51,29 @@ namespace SEP6_frontendd.Controllers
 
             var countsByOrigin = new List<List<double?>>();
 
+            var origins = new List<string>();
 
+            foreach (var monthlyFlightsOrigin in monthlyFlightsOrigins)
+            {
+                var counts1 = new List<double?>();
+                foreach (var monthlyFlights1 in monthlyFlightsOrigin.monthlyFlights)
+                {
+                    counts1.Add(monthlyFlights1.count);
+                }
+                countsByOrigin.Add(counts1);
+
+                origins.Add(monthlyFlightsOrigin.origin);
+            }
+
+            var chart2 = BarCharts.BuildColorfulBarChartWithManyDatasets(monthsNames, countsByOrigin, origins);
+
+            var chart3 = BarCharts.GetStackedBarChart(monthsNames, countsByOrigin, origins);
 
             ViewData["chart1"] = chart1;
 
-            //ViewData["chart2"] = chart2;
+            ViewData["chart2"] = chart2;
+
+            ViewData["chart3"] = chart3;
 
             return View();
         }

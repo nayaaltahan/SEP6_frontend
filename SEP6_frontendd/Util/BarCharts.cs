@@ -20,7 +20,6 @@ namespace SEP6_frontendd.Util
 
             BarDataset dataset = new BarDataset()
             {
-                Label = "My First dataset",
                 Data = counts,
                 BackgroundColor = new List<ChartColor> { Colors.GetRed(), Colors.GetOrange(), Colors.GetYellow(), Colors.GetGreen(), Colors.GetBlue(), Colors.GetPurple(), Colors.GetRed(), Colors.GetOrange(), Colors.GetYellow(), Colors.GetGreen(), Colors.GetBlue(), Colors.GetPurple() },
                 BorderColor = new List<ChartColor> { Colors.GetRedBorder(), Colors.GetOrangeBorder(), Colors.GetYellowBorder(), Colors.GetGreenBorder(), Colors.GetBlueBorder(), Colors.GetPurpleBorder(), Colors.GetRedBorder(), Colors.GetOrangeBorder(), Colors.GetYellowBorder(), Colors.GetGreenBorder(), Colors.GetBlueBorder(), Colors.GetPurpleBorder() },
@@ -31,6 +30,10 @@ namespace SEP6_frontendd.Util
             data.Datasets.Add(dataset);
 
             chart.Data = data;
+
+            chart.Options = BeginsAtZeroOptions();
+
+            DisableLabel(chart.Options);
 
             return chart;
         }
@@ -46,23 +49,129 @@ namespace SEP6_frontendd.Util
 
             data.Datasets = new List<Dataset>();
 
-            foreach (var count in counts)
+            var backgroundColors = new List<ChartColor>{Colors.GetRed(), Colors.GetBlue(), Colors.GetGreen() };
+
+            var borderColors = new List<ChartColor> { Colors.GetRedBorder(), Colors.GetBlueBorder(), Colors.GetGreenBorder() };
+
+            for (int i = 0 ; i < counts.Count; i++)
             {
                 BarDataset dataset = new BarDataset()
                 {
-                    Label = "My First dataset",
-                    Data = count,
-                    BackgroundColor = new List<ChartColor> { Colors.GetRed(), Colors.GetOrange(), Colors.GetYellow(), Colors.GetGreen(), Colors.GetBlue(), Colors.GetPurple(), Colors.GetRed(), Colors.GetOrange(), Colors.GetYellow(), Colors.GetGreen(), Colors.GetBlue(), Colors.GetPurple() },
-                    BorderColor = new List<ChartColor> { Colors.GetRedBorder(), Colors.GetOrangeBorder(), Colors.GetYellowBorder(), Colors.GetGreenBorder(), Colors.GetBlueBorder(), Colors.GetPurpleBorder(), Colors.GetRedBorder(), Colors.GetOrangeBorder(), Colors.GetYellowBorder(), Colors.GetGreenBorder(), Colors.GetBlueBorder(), Colors.GetPurpleBorder() },
+                    Label = datasetLabels[i],
+                    Data = counts[i],
+                    BackgroundColor = new List<ChartColor>{backgroundColors[i]},
+                    BorderColor = new List<ChartColor> { borderColors[i] },
                     BorderWidth = new List<int> { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
                 };
 
                 data.Datasets.Add(dataset);
             }
-            
+
+            chart.Options = BeginsAtZeroOptions();
+
             chart.Data = data;
 
             return chart;
+        }
+
+        public static Chart GetStackedBarChart(List<string> labels, List<List<double?>> counts,
+            List<string> datasetLabels)
+        {
+            Chart chart = BuildColorfulBarChartWithManyDatasets(labels, counts, datasetLabels);
+            StackedOptions(chart.Options);
+            return chart;
+        }
+
+        public static Chart GetPercentageChart(List<string> labels, List<List<double?>> counts,
+            List<string> datasetLabels)
+        {
+            Chart chart = BuildColorfulBarChartWithManyDatasets(labels, counts, datasetLabels);
+            StackedOptions(chart.Options);
+            return chart;
+        }
+
+        public static Options BeginsAtZeroOptions()
+        {
+            var options = new Options
+            {
+                Scales = new Scales()
+            };
+
+            var scales = new Scales
+            {
+                YAxes = new List<Scale>
+                {
+                    new CartesianScale
+                    {
+                        Ticks = new CartesianLinearTick
+                        {
+                            BeginAtZero = true
+                        }
+                    }
+                }
+            };
+
+            options.Scales = scales;
+
+            return options;
+        }
+
+        public static void DisableLabel(Options options)
+        {
+            var legend = new Legend()
+            {
+                Display = false
+            };
+
+            options.Legend = legend;
+        }
+
+        public static void StackedOptions(Options options)
+        {
+            var scales = new Scales
+            {
+                YAxes = new List<Scale>
+                {
+                    new BarScale()
+                    {
+                        Stacked = true
+                    }
+                },
+                XAxes = new List<Scale>
+                {
+                    new BarScale()
+                    {
+                        Stacked = true
+                    }
+                }
+
+            };
+
+            options.Scales = scales;
+        }
+
+        public static void PercentageOptions(Options options)
+        {
+            var scales = new Scales
+            {
+                YAxes = new List<Scale>
+                {
+                    new BarScale()
+                    {
+                        Stacked = true
+                    }
+                },
+                XAxes = new List<Scale>
+                {
+                    new BarScale()
+                    {
+                        Stacked = true
+                    }
+                }
+
+            };
+
+            options.Scales = scales;
         }
     }
 }

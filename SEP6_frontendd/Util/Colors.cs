@@ -38,9 +38,9 @@ namespace SEP6_frontendd.Util
             return ChartColor.FromRgba(153, 102,255, 0.2);
         }
 
-        public static ChartColor GetGreyBorder()
+        public static ChartColor GetGrey()
         {
-            return ChartColor.FromRgb(201, 203, 207);
+            return ChartColor.FromRgba(201, 203, 207, 0.2);
         }
 
         public static ChartColor GetRedBorder()
@@ -73,9 +73,10 @@ namespace SEP6_frontendd.Util
             return ChartColor.FromRgb(153, 102, 255);
         }
 
-        public static ChartColor GetGrey()
+        public static ChartColor GetGreyBorder()
         {
             return ChartColor.FromRgb(201, 203, 207);
         }
+
     }
 }

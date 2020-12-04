@@ -73,7 +73,7 @@ namespace SEP6_frontendd
             try
             {
                 HttpResponseMessage
-                    response = client.GetAsync("/monthly")
+                    response = client.GetAsync("v1/frequency/origin")
                         .Result; // Blocking call! Program will wait here until a response is received or a timeout occurs.
                 if (response.IsSuccessStatusCode)
                 {
