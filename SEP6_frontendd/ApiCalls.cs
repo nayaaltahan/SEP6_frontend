@@ -187,5 +187,170 @@ namespace SEP6_frontendd
                 client.Dispose();
             }
         }
+
+        public static List<Weather> GetWeathersByOrigin()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // List data response.
+            try
+            {
+                HttpResponseMessage
+                    response = client.GetAsync("v1/weather/origin")
+                        .Result; // Blocking call! Program will wait here until a response is received or a timeout occurs.
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body.
+                    var weathers =
+                        response.Content.ReadAsAsync<List<Weather>>().Result;
+                    return weathers;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            finally
+            {
+                client.Dispose();
+            }
+        }
+
+        public static List<TemperatureOrigin> GetTemperatureAttributes()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // List data response.
+            try
+            {
+                HttpResponseMessage
+                    response = client.GetAsync("v1/weather/temperatureAtt")
+                        .Result; // Blocking call! Program will wait here until a response is received or a timeout occurs.
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body.
+                    var temperatures =
+                        response.Content.ReadAsAsync<List<TemperatureOrigin>>().Result;
+                    return temperatures;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            finally
+            {
+                client.Dispose();
+            }
+        }
+
+        public static List<Temperature> GetTemperaturesJfk()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // List data response.
+            try
+            {
+                HttpResponseMessage
+                    response = client.GetAsync("v1/weather/temperature")
+                        .Result; // Blocking call! Program will wait here until a response is received or a timeout occurs.
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body.
+                    var temperatures =
+                        response.Content.ReadAsAsync<List<Temperature>>().Result;
+                    return temperatures;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            finally
+            {
+                client.Dispose();
+            }
+        }
+
+        public static List<Temperature> GetMeanTemperaturesJfk()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // List data response.
+            try
+            {
+                HttpResponseMessage
+                    response = client.GetAsync("v1/weather/meanTemperature")
+                        .Result; // Blocking call! Program will wait here until a response is received or a timeout occurs.
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body.
+                    var temperatures =
+                        response.Content.ReadAsAsync<List<Temperature>>().Result;
+                    return temperatures;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            finally
+            {
+                client.Dispose();
+            }
+        }
+
+        public static List<TemperatureOrigin> GetMeanTemperaturesOrigin()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // List data response.
+            try
+            {
+                HttpResponseMessage
+                    response = client.GetAsync("v1/weather/meanTemperatureOrigin")
+                        .Result; // Blocking call! Program will wait here until a response is received or a timeout occurs.
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body.
+                    var temperatures =
+                        response.Content.ReadAsAsync<List<TemperatureOrigin>>().Result;
+                    return temperatures;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            finally
+            {
+                client.Dispose();
+            }
+        }
     }
 }

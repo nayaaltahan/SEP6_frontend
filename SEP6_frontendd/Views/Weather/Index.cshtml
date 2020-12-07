@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h1>Weather Observations per Origin</h1>
+
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>Origin </th>
+        <th>Number of Observations </th>
+    </tr>
+    @{
+        var data = ViewBag.SuccessBody;
+        foreach (var d in data)
+        {
+            <tr>
+                <td>@d.Origin</td>
+                <td>@d.Count</td>
+            </tr>
+
+        }
+    }
+</table>
+
+<h1 class="hello">Temperature at JFK</h1>
+<div><canvas id="lineChart1"></canvas></div>
+<h1>Temperature Attributes at Three Origins</h1>
+<div><canvas id="lineChart2"></canvas></div>
+<h1>Daily Mean Temperature at JFK</h1>
+<div><canvas id="lineChart3"></canvas></div>
+<h1>Daily Mean Temperature at the Three Origins</h1>
+<div><canvas id="lineChart4"></canvas></div>
+
+
+
+@{ChartJSCore.Models.Chart chart1 = (ChartJSCore.Models.Chart)ViewData["chart1"]; }
+@{ChartJSCore.Models.Chart chart2 = (ChartJSCore.Models.Chart)ViewData["chart2"]; }
+@{ChartJSCore.Models.Chart chart3 = (ChartJSCore.Models.Chart)ViewData["chart3"]; }
+@{ChartJSCore.Models.Chart chart4 = (ChartJSCore.Models.Chart)ViewData["chart4"]; }
+
+
+
+
+
+
+@section Scripts {
+    <script src="~/lib/Chart.js/dist/Chart.js"></script>
+    <script>
+        @Html.Raw(chart1.CreateChartCode("lineChart1"));
+        @Html.Raw(chart2.CreateChartCode("lineChart2"));
+        @Html.Raw(chart3.CreateChartCode("lineChart3"));
+        @Html.Raw(chart4.CreateChartCode("lineChart4"));
+
+
+    </script>
+}
