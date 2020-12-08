@@ -22,3 +22,17 @@
         }
     }
 </table>
+
+<h1 class="hello">Number of Flights per Month</h1>
+<div><canvas id="lineChart1"></canvas></div>
+
+@{ChartJSCore.Models.Chart chart1 = (ChartJSCore.Models.Chart)ViewData["chart1"]; }
+
+@section Scripts {
+    <script src="~/lib/Chart.js/dist/Chart.js"></script>
+    <script>
+        @Html.Raw(chart1.CreateChartCode("lineChart1"));
+
+    </script>
+}
+

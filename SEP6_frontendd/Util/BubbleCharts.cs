@@ -49,7 +49,7 @@ namespace SEP6_frontendd.Util
             return chart;
         }
 
-        public static Chart BuildTemperatureAttributesBubbleChart(List<TemperatureOrigin> temperatureOrigins)
+        public static Chart BuildTemperatureAttributesBubbleChart(TemperatureOrigin temperatureOrigins, ChartColor color1, ChartColor color2)
         {
             Chart chart = new Chart();
 
@@ -63,11 +63,10 @@ namespace SEP6_frontendd.Util
 
             int j = 0;
 
-            for (int i = 0; i < temperatureOrigins.Count ; i++)
-            {
+            
                 var dataset = new BubbleDataset();
                 var bubbleDataList = new List<BubbleData>();
-                foreach (var temp in temperatureOrigins[i].TemperatureAtts)
+                foreach (var temp in temperatureOrigins.TemperatureAtts)
                 {
                     TimeSpan t = (temp.Time - new DateTime(1970, 1, 1));
                     var bubbleData = new BubbleData
@@ -79,14 +78,14 @@ namespace SEP6_frontendd.Util
                     bubbleDataList.Add(bubbleData);
                 }
                 dataset.Data = bubbleDataList;
-                dataset.BorderColor = new List<ChartColor>{colors[j++]};
+                dataset.BorderColor = new List<ChartColor>{color1};
                 dataset.BackgroundColor = new List<ChartColor>{ChartColor.FromRgba(255,255,255,0.2)};
-                dataset.Label = temperatureOrigins[i].Origin;
+                dataset.Label = "TEMP";
                 datasets.Add(dataset);
 
                 var dewpDataset = new BubbleDataset();
                 var bubbleDataList2 = new List<BubbleData>();
-                foreach (var temp in temperatureOrigins[i].TemperatureAtts)
+                foreach (var temp in temperatureOrigins.TemperatureAtts)
                 {
                     TimeSpan t = (temp.Time - new DateTime(1970, 1, 1));
                     var bubbleData = new BubbleData
@@ -98,13 +97,13 @@ namespace SEP6_frontendd.Util
                     bubbleDataList2.Add(bubbleData);
                 }
                 dewpDataset.Data = bubbleDataList2;
-                dewpDataset.Label = temperatureOrigins[i].Origin;
-                dewpDataset.BorderColor = new List<ChartColor> { colors[j++] };
+                dewpDataset.Label = "DEWP";
+                dewpDataset.BorderColor = new List<ChartColor> { color2 };
                 dewpDataset.BackgroundColor = new List<ChartColor> { ChartColor.FromRgba(255, 255, 255, 0.2) };
                 datasets.Add(dewpDataset);
-            }
+            
 
-            data.Datasets = datasets;
+            data.Datasets = new List<Dataset>{dataset, dewpDataset};
 
             FixTimeLabels(chart.Options);
 

@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Planes";
+    Layout = "_Layout";
+}
+
+<h1>Manufacturers with more than 200 Planes</h1>
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>Manufacturer </th>
+        <th>Number of Planes </th>
+    </tr>
+    @{
+        var data = ViewBag.table1;
+        foreach (var d in data)
+        {
+            <tr>
+                <td>@d.Name</td>
+                <td>@d.Count</td>
+            </tr>
+
+        }
+    }
+</table>
+
+<h1>Manufacturers with more than 200 Flights</h1>
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>Manufacturer </th>
+        <th>Number of Flights </th>
+    </tr>
+    @{
+        var data2 = ViewBag.table2;
+        foreach (var d in data2)
+        {
+            <tr>
+                <td>@d.Name</td>
+                <td>@d.Count</td>
+            </tr>
+
+        }
+    }
+</table>
+
+<h1>Number of Planes of each Airbus Model</h1>
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>Model </th>
+        <th>Number of Planes </th>
+    </tr>
+    @{
+        var data3 = ViewBag.table3;
+        foreach (var d in data3)
+        {
+            <tr>
+                <td>@d.Model</td>
+                <td>@d.Count</td>
+            </tr>
+
+        }
+    }
+</table>
+

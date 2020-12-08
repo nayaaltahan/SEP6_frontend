@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ChartJSCore.Models;
+using SEP6_frontendd.ApiModels;
 using SEP6_frontendd.Util;
 
 namespace SEP6_frontendd.Controllers
@@ -20,7 +21,11 @@ namespace SEP6_frontendd.Controllers
 
             var temperaturesOrigin = ApiCalls.GetTemperatureAttributes();
 
-            var chart2 = BubbleCharts.BuildTemperatureAttributesBubbleChart(temperaturesOrigin);
+            var chartAtt1 = BubbleCharts.BuildTemperatureAttributesBubbleChart(temperaturesOrigin[0], Colors.GetRed(), Colors.GetRedBorder());
+
+            var chartAtt2 = BubbleCharts.BuildTemperatureAttributesBubbleChart(temperaturesOrigin[1], Colors.GetBlue(), Colors.GetBlueBorder());
+
+            var chartAtt3 = BubbleCharts.BuildTemperatureAttributesBubbleChart(temperaturesOrigin[2], Colors.GetGreen(), Colors.GetGreenBorder() );
 
             var meanTemperatures = ApiCalls.GetMeanTemperaturesJfk();
 
@@ -32,7 +37,11 @@ namespace SEP6_frontendd.Controllers
 
             ViewData["chart1"] = chart1;
 
-            ViewData["chart2"] = chart2;
+            ViewData["chart21"] = chartAtt1;
+
+            ViewData["chart22"] = chartAtt2;
+
+            ViewData["chart23"] = chartAtt3;
 
             ViewData["chart3"] = chart3;
 

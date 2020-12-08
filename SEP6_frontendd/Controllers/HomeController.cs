@@ -48,7 +48,6 @@ namespace SEP6_frontendd.Controllers
 
             var chart1 = BarCharts.BuildColorfulBarChart(monthsNames, counts);
 
-
             var countsByOrigin = new List<List<double?>>();
 
             var origins = new List<string>();
@@ -69,11 +68,42 @@ namespace SEP6_frontendd.Controllers
 
             var chart3 = BarCharts.GetStackedBarChart(monthsNames, countsByOrigin, origins);
 
+            var countsByMonth = new List<List<double?>>();
+
+            for (int i = 0; i < 12; i++)
+            {
+                var newCounts = new List<double?>();
+
+                foreach (var counts1 in countsByOrigin)
+                {
+                    newCounts.Add(counts1[i]);
+                }
+
+                var total = newCounts[0] + newCounts[1] + newCounts[2];
+
+                for (int j = 0; j < newCounts.Count; j++)
+                {
+                    newCounts[j] = newCounts[j] / total;
+                }
+
+                countsByMonth.Add(newCounts);
+            }
+
+            var result = countsByMonth
+                .SelectMany(inner => inner.Select((item, index) => new { item, index }))
+                .GroupBy(i => i.index, i => i.item)
+                .Select(g => g.ToList())
+                .ToList();
+
+            var chart4 = BarCharts.GetStackedBarChart(monthsNames, result, origins);
+
             ViewData["chart1"] = chart1;
 
             ViewData["chart2"] = chart2;
 
             ViewData["chart3"] = chart3;
+
+            ViewData["chart4"] = chart4;
 
             return View();
         }
@@ -83,5 +113,6 @@ namespace SEP6_frontendd.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

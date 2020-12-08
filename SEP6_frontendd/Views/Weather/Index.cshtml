@@ -26,8 +26,12 @@
 
 <h1 class="hello">Temperature at JFK</h1>
 <div><canvas id="lineChart1"></canvas></div>
-<h1>Temperature Attributes at Three Origins</h1>
-<div><canvas id="lineChart2"></canvas></div>
+<h1>Temperature Attributes at EWR</h1>
+<div><canvas id="lineChart21"></canvas></div>
+<h1>Temperature Attributes at JFK</h1>
+<div><canvas id="lineChart22"></canvas></div>
+<h1>Temperature Attributes at LGA</h1>
+<div><canvas id="lineChart23"></canvas></div>
 <h1>Daily Mean Temperature at JFK</h1>
 <div><canvas id="lineChart3"></canvas></div>
 <h1>Daily Mean Temperature at the Three Origins</h1>
@@ -35,13 +39,14 @@
 
 
 
-@{ChartJSCore.Models.Chart chart1 = (ChartJSCore.Models.Chart)ViewData["chart1"]; }
-@{ChartJSCore.Models.Chart chart2 = (ChartJSCore.Models.Chart)ViewData["chart2"]; }
-@{ChartJSCore.Models.Chart chart3 = (ChartJSCore.Models.Chart)ViewData["chart3"]; }
-@{ChartJSCore.Models.Chart chart4 = (ChartJSCore.Models.Chart)ViewData["chart4"]; }
+@{ChartJSCore.Models.Chart chart1 = (ChartJSCore.Models.Chart)ViewData["chart1"];}
+@{ChartJSCore.Models.Chart chart21 = (ChartJSCore.Models.Chart)ViewData["chart21"];}
+@{ChartJSCore.Models.Chart chart22 = (ChartJSCore.Models.Chart)ViewData["chart22"];}
+@{ChartJSCore.Models.Chart chart23 = (ChartJSCore.Models.Chart)ViewData["chart23"];}
+@{ChartJSCore.Models.Chart chart3 = (ChartJSCore.Models.Chart)ViewData["chart3"];}
+@{ChartJSCore.Models.Chart chart4 = (ChartJSCore.Models.Chart)ViewData["chart4"];}
 
-
-
+}
 
 
 
@@ -49,10 +54,11 @@
     <script src="~/lib/Chart.js/dist/Chart.js"></script>
     <script>
         @Html.Raw(chart1.CreateChartCode("lineChart1"));
-        @Html.Raw(chart2.CreateChartCode("lineChart2"));
+        @Html.Raw(chart21.CreateChartCode("lineChart21"));
+        @Html.Raw(chart22.CreateChartCode("lineChart22"));
+        @Html.Raw(chart23.CreateChartCode("lineChart23"));
         @Html.Raw(chart3.CreateChartCode("lineChart3"));
         @Html.Raw(chart4.CreateChartCode("lineChart4"));
-
 
     </script>
 }

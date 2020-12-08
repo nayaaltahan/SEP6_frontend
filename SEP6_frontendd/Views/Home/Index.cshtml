@@ -8,12 +8,15 @@
 <div><canvas id="lineChart2"></canvas></div>
 <h1>Stacked Number of Flights per Month by Origin</h1>
 <div><canvas id="lineChart3"></canvas></div>
+<h1>Stacked Percentage of Flights per Month by Origin</h1>
+<div><canvas id="lineChart4"></canvas></div>
 
 
 
 @{ChartJSCore.Models.Chart chart1 = (ChartJSCore.Models.Chart)ViewData["chart1"]; }
 @{ChartJSCore.Models.Chart chart2 = (ChartJSCore.Models.Chart)ViewData["chart2"]; }
 @{ChartJSCore.Models.Chart chart3 = (ChartJSCore.Models.Chart)ViewData["chart3"]; }
+@{ChartJSCore.Models.Chart chart4 = (ChartJSCore.Models.Chart)ViewData["chart4"]; }
 
 
 
@@ -24,6 +27,8 @@
         @Html.Raw(chart1.CreateChartCode("lineChart1"));
         @Html.Raw(chart2.CreateChartCode("lineChart2"));
         @Html.Raw(chart3.CreateChartCode("lineChart3"));
+        @Html.Raw(chart4.CreateChartCode("lineChart4"));
+
 
 
     </script>

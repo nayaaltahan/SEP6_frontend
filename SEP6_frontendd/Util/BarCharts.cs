@@ -61,7 +61,7 @@ namespace SEP6_frontendd.Util
                     Data = counts[i],
                     BackgroundColor = new List<ChartColor>{backgroundColors[i]},
                     BorderColor = new List<ChartColor> { borderColors[i] },
-                    BorderWidth = new List<int> { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+                    BorderWidth = new List<int> { 1 },
                 };
 
                 data.Datasets.Add(dataset);

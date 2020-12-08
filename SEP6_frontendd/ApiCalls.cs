@@ -352,5 +352,137 @@ namespace SEP6_frontendd
                 client.Dispose();
             }
         }
+
+        public static List<Manufacturer> GetManufacturers200()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // List data response.
+            try
+            {
+                HttpResponseMessage
+                    response = client.GetAsync("v1/planes/200")
+                        .Result; // Blocking call! Program will wait here until a response is received or a timeout occurs.
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body.
+                    var manufacturers =
+                        response.Content.ReadAsAsync<List<Manufacturer>>().Result;
+                    return manufacturers;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            finally
+            {
+                client.Dispose();
+            }
+        }
+
+        public static List<Manufacturer> GetManufacturersFlights()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // List data response.
+            try
+            {
+                HttpResponseMessage
+                    response = client.GetAsync("v1/planes/flights")
+                        .Result; // Blocking call! Program will wait here until a response is received or a timeout occurs.
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body.
+                    var manufacturers =
+                        response.Content.ReadAsAsync<List<Manufacturer>>().Result;
+                    return manufacturers;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            finally
+            {
+                client.Dispose();
+            }
+        }
+
+        public static List<Airbus> GetAirbuses()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // List data response.
+            try
+            {
+                HttpResponseMessage
+                    response = client.GetAsync("v1/planes/airbuses")
+                        .Result; // Blocking call! Program will wait here until a response is received or a timeout occurs.
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body.
+                    var airbuses =
+                        response.Content.ReadAsAsync<List<Airbus>>().Result;
+                    return airbuses;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            finally
+            {
+                client.Dispose();
+            }
+        }
+
+        public static List<DestinationOrigin> GetDestinationOrigins()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // List data response.
+            try
+            {
+                HttpResponseMessage
+                    response = client.GetAsync("v1/destination/top10Origin")
+                        .Result; // Blocking call! Program will wait here until a response is received or a timeout occurs.
+                if (response.IsSuccessStatusCode)
+                {
+                    // Parse the response body.
+                    var flightsOrigins =
+                        response.Content.ReadAsAsync<List<DestinationOrigin>>().Result;
+                    return flightsOrigins;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            finally
+            {
+                client.Dispose();
+            }
+        }
     }
 }
