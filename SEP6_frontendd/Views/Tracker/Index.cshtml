@@ -1,10 +1,10 @@
 ﻿@{
-    ViewBag.Title = "title";
+    ViewData["Title"] = ViewContext.RouteData.Values["controller"].ToString();
     Layout = "_Layout";
 }
 
-<h1>Flights Tracker</h1>
-<table class="table table-bordered table-responsive table-hover">
+<h1>Mean Airtime of each Origin</h1>
+<table class="table table-responsive table-hover">
     <tr>
         <th>Origin </th>
         <th>Mean Airtime </th>
@@ -22,7 +22,8 @@
     }
 </table>
 
-<table class="table table-bordered table-responsive table-hover">
+<h1>Mean Delay for each Origin</h1>
+<table class="table table-responsive table-hover">
     <tr>
         <th>Origin </th>
         <th>Mean Arrival Delay </th>
@@ -32,11 +33,11 @@
         var data2 = ViewBag.table2;
         foreach (var d in data2)
         {
-        <tr>
-            <td>@d.Origin</td>
-            <td>@d.ArrivalDelay</td>
-            <td>@d.DepartureDelay</td>
-        </tr>
+            <tr>
+                <td>@d.Origin</td>
+                <td>@d.ArrivalDelay</td>
+                <td>@d.DepartureDelay</td>
+            </tr>
 
         }
     }

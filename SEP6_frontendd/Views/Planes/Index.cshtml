@@ -1,10 +1,10 @@
 ﻿@{
-    ViewBag.Title = "Planes";
+    ViewData["Title"] = ViewContext.RouteData.Values["controller"].ToString();
     Layout = "_Layout";
 }
 
 <h1>Manufacturers with more than 200 Planes</h1>
-<table class="table table-bordered table-responsive table-hover">
+<table class="table table-responsive table-hover">
     <tr>
         <th>Manufacturer </th>
         <th>Number of Planes </th>
@@ -23,7 +23,7 @@
 </table>
 
 <h1>Manufacturers with more than 200 Flights</h1>
-<table class="table table-bordered table-responsive table-hover">
+<table class="table table-responsive table-hover">
     <tr>
         <th>Manufacturer </th>
         <th>Number of Flights </th>
@@ -42,7 +42,7 @@
 </table>
 
 <h1>Number of Planes of each Airbus Model</h1>
-<table class="table table-bordered table-responsive table-hover">
+<table class="table table-responsive table-hover">
     <tr>
         <th>Model </th>
         <th>Number of Planes </th>

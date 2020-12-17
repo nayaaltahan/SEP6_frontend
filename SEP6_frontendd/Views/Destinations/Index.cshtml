@@ -1,11 +1,11 @@
 ﻿@{
-    ViewBag.Title = "title";
+    ViewData["Title"] = ViewContext.RouteData.Values["controller"].ToString();
     Layout = "_Layout";
 }
 
 <h1>Top 10 Destinations</h1>
 
-<table class="table table-bordered table-responsive table-hover">
+<table class="table table-responsive table-hover">
     <tr>
         <th>Destination </th>
         <th>Number of flights</th>

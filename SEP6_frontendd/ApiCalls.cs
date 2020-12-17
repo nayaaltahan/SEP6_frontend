@@ -12,7 +12,7 @@ namespace SEP6_frontendd
 {
     public class ApiCalls
     {
-        private const string URL = "https://localhost:44314/";
+        private const string URL = "https://iuzqr8b31g.execute-api.eu-west-1.amazonaws.com/Prod/";
         
             
         public ApiCalls()
@@ -22,12 +22,7 @@ namespace SEP6_frontendd
 
         public static List<MonthlyFlights> GetMonthlyFlights()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            var client = CreateHttpClient();
 
             // List data response.
             try
@@ -51,10 +46,9 @@ namespace SEP6_frontendd
             {
                 client.Dispose();
             }
-            
         }
 
-        public static List<MonthlyFlightsOrigin> GetMonthlyFlightsOrigin()
+        private static HttpClient CreateHttpClient()
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(URL);
@@ -62,6 +56,12 @@ namespace SEP6_frontendd
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
+            return client;
+        }
+
+        public static List<MonthlyFlightsOrigin> GetMonthlyFlightsOrigin()
+        {
+            var client = CreateHttpClient();
 
             // List data response.
             try
@@ -90,12 +90,7 @@ namespace SEP6_frontendd
 
         public static List<DestinationFlights> GetDestinationFlights()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            var client = CreateHttpClient();
 
             // List data response.
             try
@@ -124,12 +119,7 @@ namespace SEP6_frontendd
 
         public static List<Airtime> GetMeanAirtime()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            var client = CreateHttpClient();
 
             // List data response.
             try
@@ -157,12 +147,7 @@ namespace SEP6_frontendd
 
         public static List<Delay> GetMeanDelay()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            var client = CreateHttpClient();
 
             // List data response.
             try
@@ -190,12 +175,7 @@ namespace SEP6_frontendd
 
         public static List<Weather> GetWeathersByOrigin()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            var client = CreateHttpClient();
 
             // List data response.
             try
@@ -223,12 +203,7 @@ namespace SEP6_frontendd
 
         public static List<TemperatureOrigin> GetTemperatureAttributes()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            var client = CreateHttpClient();
 
             // List data response.
             try
@@ -256,12 +231,7 @@ namespace SEP6_frontendd
 
         public static List<Temperature> GetTemperaturesJfk()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            var client = CreateHttpClient();
 
             // List data response.
             try
@@ -289,12 +259,7 @@ namespace SEP6_frontendd
 
         public static List<Temperature> GetMeanTemperaturesJfk()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            var client = CreateHttpClient();
 
             // List data response.
             try
@@ -322,12 +287,7 @@ namespace SEP6_frontendd
 
         public static List<TemperatureOrigin> GetMeanTemperaturesOrigin()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            var client = CreateHttpClient();
 
             // List data response.
             try
@@ -355,12 +315,7 @@ namespace SEP6_frontendd
 
         public static List<Manufacturer> GetManufacturers200()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            var client = CreateHttpClient();
 
             // List data response.
             try
@@ -388,12 +343,7 @@ namespace SEP6_frontendd
 
         public static List<Manufacturer> GetManufacturersFlights()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            var client = CreateHttpClient();
 
             // List data response.
             try
@@ -421,12 +371,7 @@ namespace SEP6_frontendd
 
         public static List<Airbus> GetAirbuses()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            var client = CreateHttpClient();
 
             // List data response.
             try
@@ -454,12 +399,7 @@ namespace SEP6_frontendd
 
         public static List<DestinationOrigin> GetDestinationOrigins()
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+            var client = CreateHttpClient();
 
             // List data response.
             try

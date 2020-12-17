@@ -1,12 +1,12 @@
 ﻿
 @{
-    ViewBag.Title = "title";
+    ViewData["Title"] = ViewContext.RouteData.Values["controller"].ToString();
     Layout = "_Layout";
 }
 
 <h1>Weather Observations per Origin</h1>
 
-<table class="table table-bordered table-responsive table-hover">
+<table class="table table-responsive table-hover">
     <tr>
         <th>Origin </th>
         <th>Number of Observations </th>
