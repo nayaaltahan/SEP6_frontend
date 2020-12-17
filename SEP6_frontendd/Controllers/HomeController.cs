@@ -26,48 +26,41 @@ namespace SEP6_frontendd.Controllers
             var monthlyFlights = ApiCalls.GetMonthlyFlights();
            var monthlyFlightsOrigins = ApiCalls.GetMonthlyFlightsOrigin();
 
-            var months = new Dictionary<int,string>
-            {
-                {1,"Jan"}, {2,"Feb"}, {3,"Mar"}, {4,"Apr"}, {5,"May"}, {6,"June"},
-                {7, "Jul"}, {8,"Aug"}, {9, "Sep"}, {10,"Oct"}, {11, "Nov"}, {12, "Dec"}
-            };
+            var monthsNames = GetMonthsNames(monthlyFlights);
 
-            var monthsNames = new List<string>();
-
-            foreach (var flights in monthlyFlights)
-            {
-                monthsNames.Add(months.GetValueOrDefault(flights.month));
-            }
-
-            var counts = new List<double?>();
-
-            foreach (var flight in monthlyFlights)
-            {
-                counts.Add(flight.count);
-            }
+            var counts = GetFlightsCounts(monthlyFlights);
 
             var chart1 = BarCharts.BuildColorfulBarChart(monthsNames, counts);
 
-            var countsByOrigin = new List<List<double?>>();
-
-            var origins = new List<string>();
-
-            foreach (var monthlyFlightsOrigin in monthlyFlightsOrigins)
-            {
-                var counts1 = new List<double?>();
-                foreach (var monthlyFlights1 in monthlyFlightsOrigin.monthlyFlights)
-                {
-                    counts1.Add(monthlyFlights1.count);
-                }
-                countsByOrigin.Add(counts1);
-
-                origins.Add(monthlyFlightsOrigin.origin);
-            }
+            var countsByOrigin = GetFlightsCountsByOrigin(monthlyFlightsOrigins, out var origins);
 
             var chart2 = BarCharts.BuildColorfulBarChartWithManyDatasets(monthsNames, countsByOrigin, origins);
 
             var chart3 = BarCharts.GetStackedBarChart(monthsNames, countsByOrigin, origins);
 
+            var countsByMonth = GetCountsByMonth(countsByOrigin);
+
+            var sortedCountedByMonth = countsByMonth
+                .SelectMany(inner => inner.Select((item, index) => new { item, index }))
+                .GroupBy(i => i.index, i => i.item)
+                .Select(g => g.ToList())
+                .ToList();
+
+            var chart4 = BarCharts.GetStackedBarChart(monthsNames, sortedCountedByMonth, origins);
+
+            ViewData["chart1"] = chart1;
+
+            ViewData["chart2"] = chart2;
+
+            ViewData["chart3"] = chart3;
+
+            ViewData["chart4"] = chart4;
+
+            return View();
+        }
+
+        private static List<List<double?>> GetCountsByMonth(List<List<double?>> countsByOrigin)
+        {
             var countsByMonth = new List<List<double?>>();
 
             for (int i = 0; i < 12; i++)
@@ -89,23 +82,59 @@ namespace SEP6_frontendd.Controllers
                 countsByMonth.Add(newCounts);
             }
 
-            var result = countsByMonth
-                .SelectMany(inner => inner.Select((item, index) => new { item, index }))
-                .GroupBy(i => i.index, i => i.item)
-                .Select(g => g.ToList())
-                .ToList();
+            return countsByMonth;
+        }
 
-            var chart4 = BarCharts.GetStackedBarChart(monthsNames, result, origins);
+        private static List<List<double?>> GetFlightsCountsByOrigin(List<MonthlyFlightsOrigin> monthlyFlightsOrigins, out List<string> origins)
+        {
+            var countsByOrigin = new List<List<double?>>();
 
-            ViewData["chart1"] = chart1;
+            origins = new List<string>();
 
-            ViewData["chart2"] = chart2;
+            foreach (var monthlyFlightsOrigin in monthlyFlightsOrigins)
+            {
+                var counts1 = new List<double?>();
+                foreach (var monthlyFlights1 in monthlyFlightsOrigin.monthlyFlights)
+                {
+                    counts1.Add(monthlyFlights1.count);
+                }
 
-            ViewData["chart3"] = chart3;
+                countsByOrigin.Add(counts1);
 
-            ViewData["chart4"] = chart4;
+                origins.Add(monthlyFlightsOrigin.origin);
+            }
 
-            return View();
+            return countsByOrigin;
+        }
+
+        private static List<double?> GetFlightsCounts(List<MonthlyFlights> monthlyFlights)
+        {
+            var counts = new List<double?>();
+
+            foreach (var flight in monthlyFlights)
+            {
+                counts.Add(flight.count);
+            }
+
+            return counts;
+        }
+
+        private static List<string> GetMonthsNames(List<MonthlyFlights> monthlyFlights)
+        {
+            var months = new Dictionary<int, string>
+            {
+                {1, "Jan"}, {2, "Feb"}, {3, "Mar"}, {4, "Apr"}, {5, "May"}, {6, "June"},
+                {7, "Jul"}, {8, "Aug"}, {9, "Sep"}, {10, "Oct"}, {11, "Nov"}, {12, "Dec"}
+            };
+
+            var monthsNames = new List<string>();
+
+            foreach (var flights in monthlyFlights)
+            {
+                monthsNames.Add(months.GetValueOrDefault(flights.month));
+            }
+
+            return monthsNames;
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
