@@ -23,14 +23,18 @@ namespace SEP6_frontendd.Controllers
 
         public IActionResult Index()
         {
+            //Create First Chart
             var monthlyFlights = ApiCalls.GetMonthlyFlights();
-           var monthlyFlightsOrigins = ApiCalls.GetMonthlyFlightsOrigin();
 
             var monthsNames = GetMonthsNames(monthlyFlights);
 
             var counts = GetFlightsCounts(monthlyFlights);
 
             var chart1 = BarCharts.BuildColorfulBarChart(monthsNames, counts);
+
+            //Craete Second Chart
+            var monthlyFlightsOrigins = ApiCalls.GetMonthlyFlightsOrigin();
+
 
             var countsByOrigin = GetFlightsCountsByOrigin(monthlyFlightsOrigins, out var origins);
 

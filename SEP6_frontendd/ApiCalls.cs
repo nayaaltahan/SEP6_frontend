@@ -24,15 +24,13 @@ namespace SEP6_frontendd
         {
             var client = CreateHttpClient();
 
-            // List data response.
             try
             {
                 HttpResponseMessage
                     response = client.GetAsync("v1/frequency/monthly")
-                        .Result; // Blocking call! Program will wait here until a response is received or a timeout occurs.
+                        .Result; 
                 if (response.IsSuccessStatusCode)
                 {
-                    // Parse the response body.
                     var monthlyFlights =
                         response.Content.ReadAsAsync<List<MonthlyFlights>>().Result;
                     return monthlyFlights;
